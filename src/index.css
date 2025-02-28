@@ -11,3 +11,47 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.drive-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+  height: auto;
+  margin-bottom: 120px;
+}
+.upload-btn {
+  background-color: #042baa;
+  border: none;
+  color: white;
+  padding: 0; /* Remove extra padding */
+  display: block;
+  margin: auto;
+  font-size: 16px;
+  border-radius: 8px;
+  width: 120px;
+  height: 40px;
+  line-height: 40px; /* Matches height for perfect vertical centering */
+  text-align: center;
+  cursor: pointer;
+}
+.subtitle-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subtitle {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.fullscreen-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
