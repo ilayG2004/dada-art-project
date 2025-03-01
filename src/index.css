@@ -18,6 +18,7 @@ code {
   margin-right: auto;
   width: 10%;
   height: auto;
+  margin-top: 20px;
   margin-bottom: 120px;
 }
 .upload-btn {
@@ -55,3 +56,13 @@ code {
   object-fit: contain;
 }
 
+.timer-container {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.timer {
+  color: greenyellow;
+}

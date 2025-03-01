@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import cosmicSound from "./sounds/CosmicFrequency.mp3";
 import mourningSound from "./sounds/MourningDove.mp3";
 
-export function useImageAlteration(image, canvasRef) {
-  const [timer, setTimer] = useState(-1);
+export function useImageAlteration(image, canvasRef, timer, setTimer) {
   const audioElement = useRef(new Audio(cosmicSound));
   const birdElement = useRef(new Audio(mourningSound));
   const distortionHistory = useRef([]);
@@ -11,7 +10,7 @@ export function useImageAlteration(image, canvasRef) {
   useEffect(() => {
     if (!image || !canvasRef.current) return;
 
-    const distortionDuration = 5000; // 5 seconds
+    const distortionDuration = 30000; // 5 seconds
     const interval = 50;
     let timerId;
 
@@ -55,7 +54,12 @@ export function useImageAlteration(image, canvasRef) {
 
         audioElement.current.volume += 0.001;
         if (Math.random() < 0.05) birdElement.current.play();
-        setTimer(Math.max(5 - Math.floor(elapsed / 1000), 0));
+        if (Math.random() < 0.1) {
+          setTimer(Math.max(30 - Math.floor(elapsed / 1000), 0) + (Math.random()*1000));
+        } else {
+          setTimer(Math.max(30 - Math.floor(elapsed / 1000), 0));
+        }
+        
       };
 
       const restore = () => {
@@ -72,6 +76,8 @@ export function useImageAlteration(image, canvasRef) {
           imageData.data.set(distortionHistory.current[restoreFrameIndex]);
           ctx.putImageData(imageData, 0, 0);
 
+          setTimer((Math.random()*1000) + (Math.random()*3000));
+
           restoreFrameIndex--;
           setTimeout(restoreStep, interval);
         };
@@ -83,5 +89,5 @@ export function useImageAlteration(image, canvasRef) {
     };
 
     return () => clearInterval(timerId);
-  }, [image, canvasRef]);
+  }, [image, canvasRef, setTimer]);
 }

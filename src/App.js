@@ -5,6 +5,7 @@ import { useImageAlteration } from "./imageAlteration"; // Import the hook
 
 function App() {
   const [image, setImage] = useState(null);
+  const [timer, setTimer] = useState(0);
   const canvasRef = useRef(null);
 
   const handleUpload = (event) => {
@@ -14,7 +15,7 @@ function App() {
       setImage(imgURL);
     }
   };
-  useImageAlteration(image, canvasRef);
+  useImageAlteration(image, canvasRef, timer, setTimer);
 
   return (
     <div>
@@ -29,7 +30,14 @@ function App() {
           <input type="file" accept="image/*" onChange={handleUpload} hidden />
       </label>
     </div>)}
-    {image && <canvas ref={canvasRef} className="fullscreen-image"></canvas>}
+    {image && 
+    <>
+    <canvas ref={canvasRef} className="fullscreen-image"></canvas> 
+    <div className="timer-container">
+      <h1 className="timer">{timer}</h1>
+    </div>
+    </>
+    }
   </div>
   );
 }
