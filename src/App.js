@@ -34,7 +34,7 @@ function App() {
     <>
     <canvas ref={canvasRef} className="fullscreen-image"></canvas> 
     <div className="timer-container">
-      <h1 className="timer">{timer}</h1>
+      {timer > -1 && <h1 className="timer">{timer}</h1>}
     </div>
     </>
     }

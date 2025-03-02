@@ -1,10 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import cosmicSound from "./sounds/CosmicFrequency.mp3";
 import mourningSound from "./sounds/MourningDove.mp3";
+import waterSound from "./sounds/WaterDripping.mp3";
+import windChimes from "./sounds/WindChimesSoundEffect.mp3";
 
 export function useImageAlteration(image, canvasRef, timer, setTimer) {
   const audioElement = useRef(new Audio(cosmicSound));
   const birdElement = useRef(new Audio(mourningSound));
+  const waterElement = useRef(new Audio(waterSound));
+  const windElement = useRef(new Audio(windChimes));
+
   const distortionHistory = useRef([]);
 
   useEffect(() => {
@@ -53,7 +58,6 @@ export function useImageAlteration(image, canvasRef, timer, setTimer) {
         elapsed += interval;
 
         audioElement.current.volume += 0.001;
-        if (Math.random() < 0.05) birdElement.current.play();
         if (Math.random() < 0.1) {
           setTimer(Math.max(30 - Math.floor(elapsed / 1000), 0) + (Math.random()*1000));
         } else {
@@ -78,6 +82,9 @@ export function useImageAlteration(image, canvasRef, timer, setTimer) {
 
           setTimer((Math.random()*1000) + (Math.random()*3000));
 
+          if (Math.random() < 0.05) birdElement.current.play();
+          //if (Math.random() < 0.05) waterElement.current.play();
+          if (Math.random() < 0.05) windElement.current.play();
           restoreFrameIndex--;
           setTimeout(restoreStep, interval);
         };
